@@ -1,38 +1,26 @@
-.App {
+.one {
+  height: 40vh;
+  margin: 0;
+  background-color: #9dbbae;
+  color: white
+}
+
+
+.two {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: url(./assets/taxReturn.jpg);
+  background-size: 100%;
+  height: 120vh;
   color: white;
+  background-position-y: 120px;
 }
 
-.App-link {
-  color: #61dafb;
+Button {
+  width: 6em;
+  margin: 0em 1em 0em 0em;
+  background-color: #bdd2a6;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.three {
+  margin: 0em;
 }
