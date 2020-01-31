@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
 import { Table, Button } from 'reactstrap';
 import CommCreate from './CommCreate';
+import CommEdit from './CommEdit';
 
 
 const CommTable = (props) => {
   const [createUp, setCreateUp] = useState(false);
+
+  const [updateActive, setUpdateActive] = useState(false);
+  const [commToUpdate, setCommToUpdate] = useState({});
+
 
   const commMapper = () => {
     return props.comments.map((comment, index) => {
@@ -15,13 +20,22 @@ const CommTable = (props) => {
           <td>{comment.schedule}</td>
           <td>{comment.line}</td>
           <td>{comment.comment}</td>
-          <td><Button>Delete</Button><Button>Update</Button></td>
+          <td><Button>Delete</Button><Button onClick={(e) => {updateOn()}}>Update</Button></td>
         </tr>
-      
-    
-    
   )
 } )}
+
+const editUpdateComm = (comm) => {
+  setCommToUpdate(comm)
+}
+
+const updateOn = () => {
+  setUpdateActive(true);
+}
+
+const updateOff = () => {
+  setUpdateActive(false);
+}
 
 const createOn = () => {
   setCreateUp(true);
@@ -45,11 +59,12 @@ return(
         </tr>
       </thead>
       <tbody>
-        {commMapper()}
-        {createUp ? <CommCreate token={props.token} createOff={createOff} fetchComms={props.fetchComms}  /> : <></>}
+        {commMapper()}     
       </tbody>
       </Table>
-      <Button outline color="info" size="md" block onClick={(e) => setCreateUp(!createUp)}>Add New Comment</Button>
+      {createUp ? <CommCreate token={props.token} createOff={createOff} fetchComms={props.fetchComms}/> : <></>}
+      {updateActive ? <CommEdit token={props.token} updateOff={updateOff} fetchComms={props.fetchComms} commToUpdate={commToUpdate}/> : <> </>}
+      <Button outline color="info" size="md" block onClick={(e) => {createOn()}}>Add New Comment</Button>
      
       </>
 )
