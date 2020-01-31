@@ -4,6 +4,7 @@ import Login from '../auth/Login';
 import Signup from '../auth/Signup';
 
 
+
 const Auth = (props) => {
     const [loginUp, setLoginUp] = useState(false);
     const [signupUp, setSignupUp] = useState(false);
