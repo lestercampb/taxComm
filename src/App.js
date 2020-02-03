@@ -10,6 +10,7 @@ import './App.css';
 //update token, set session token so it can pass to comm index
 const App = () => {
   const [sessionToken, setSessionToken] = useState('');
+  const [userName, setUserName] = useState('');
 
 useEffect(() => {
   if (localStorage.getItem('token')) {
@@ -23,14 +24,19 @@ const updateToken = (newToken) => {
   console.log(sessionToken);
 }
 
+const updateUser = (newUser) => {
+  localStorage.setItem('user', newUser );
+  setUserName(newUser);
+}
+
 const clearToken = () => {
   localStorage.clear();
   setSessionToken('')
 }
 
 const protectedView = () => {
-  return (sessionToken ===localStorage.getItem('token') ? <CommIndex token = {sessionToken} updateToken = {updateToken} clickLogout={clearToken}/>
-  : <Auth updateToken = {updateToken}/> )
+  return (sessionToken ===localStorage.getItem('token') ? <CommIndex token = {sessionToken} updateToken = {updateToken} updateUser={updateUser} clickLogout={clearToken}/>
+  : <Auth updateToken = {updateToken} updateUser={updateUser}/> )
 }
 
 return(

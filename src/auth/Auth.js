@@ -22,8 +22,8 @@ const Auth = (props) => {
         <Container className="three">
           <h3>Let's get started.</h3>
           <Button onClick={(e) => setSignupUp(!signupUp)}>Sign up</Button> <Button onClick={(e) => setLoginUp(!loginUp)}>Log in</Button>
-        {loginUp ? <Login updateToken={props.updateToken}  /> : <></>}
-        {signupUp ? <Signup updateToken={props.updateToken}  /> : <></>}
+        {loginUp ? <Login updateToken={props.updateToken} updateUser={props.updateUser} /> : <></>}
+        {signupUp ? <Signup updateToken={props.updateToken} updateUser={props.updateUser}  /> : <></>}
        
   
         </Container>

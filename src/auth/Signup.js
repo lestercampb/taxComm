@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import APIURL from '../helpers/Environment';
 
 const Signup = (props) => {
     const [email, setEmail] = useState('');
@@ -10,7 +11,7 @@ const Signup = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch('http://localhost:3000/user/signup', {
+        fetch(`${APIURL}/user/signup`, {
             method: 'POST',
             body: JSON.stringify({email: email, password: password, firstName: firstName, lastName: lastName}),
             
@@ -21,6 +22,7 @@ const Signup = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.sessionToken);
+            props.updateUser(data.user.firstName);
         })
     }
 
@@ -35,11 +37,11 @@ return (
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label>Email:</Label>
-                    <Input name="username" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <Input name="username" type="email"  value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password:</Label>
-                    <Input name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <Input name="password" type="password" minLength="5" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </FormGroup>
                 <FormGroup>
                     <Label>First Name:</Label>
@@ -50,7 +52,7 @@ return (
                     <Input name="password" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
                 </FormGroup>
                 
-                <Button color="primary" onClick={toggle} type="submit">Submit</Button>
+                <Button color="primary" onClick={email.type==="email" && password.minLength==="5" ? toggle : null} type="submit">Submit</Button>
                 <Button color="secondary" onClick = {toggle}>Cancel</Button>
             </Form>
         </ModalBody>

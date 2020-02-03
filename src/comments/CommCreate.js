@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import APIURL from '../helpers/Environment';
+import css from './modal.css';
 
 const CommCreate = (props) => {
     const [form, setForm] = useState('');
@@ -11,7 +13,7 @@ const CommCreate = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3000/comment/', {
+        fetch(`${APIURL}/comment/`, {
             method: 'POST',
             body: JSON.stringify({form: form, schedule: schedule, line: line, comment: comment}),
         
@@ -34,7 +36,7 @@ const CommCreate = (props) => {
 
     return(
         <>
-        <Modal isOpen={true}>
+        <Modal modalClassName="modal" isOpen={true}>
 
        <ModalHeader>Add a new comment</ModalHeader>
        <ModalBody>
@@ -61,7 +63,8 @@ const CommCreate = (props) => {
                 <Label htmlFor="comment">Comment:</Label>
                 <Input name="comment" value={comment} onChange = {(e) => setComment(e.target.value)}/>
             </FormGroup>
-            <Button type="submit" onClick={(e) => setCreateUp(false)}>Click to Submit</Button>
+            <Button type="submit" onClick={(e) => setCreateUp(false)}>Submit</Button>
+            <Button onClick={(e) => props.createOff()}>Cancel</Button>
         </Form>
         </ModalBody>
         </Modal>

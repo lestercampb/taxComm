@@ -1,16 +1,20 @@
 import React, {useState} from 'react';
 import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import APIURL from '../helpers/Environment';
+import css from './modal.css';
 
 const CommEdit = (props) => {
     const [editForm, setEditForm] = useState(props.commToUpdate.form);
     const [editSchedule, setEditSchedule] = useState(props.commToUpdate.schedule);
     const [editLine, setEditLine] = useState(props.commToUpdate.line);
     const [editComment, setEditComment] = useState(props.commToUpdate.comment);
+    
+    console.log(props.commToUpdate);
 
     const commUpdate = (e) => {
         e.preventDefault();
-        console.log(props.comment)
-        fetch(`http://localhost:3000/comment/${props.comments.id}`, {
+        console.log(props.commToUpdate)
+        fetch(`${APIURL}/comment/${props.commToUpdate.id}`, {
             method: 'PUT',
             body: JSON.stringify({form: editForm, schedule: editSchedule, line: editLine, comment: editComment}),
             headers: new Headers({
@@ -19,15 +23,15 @@ const CommEdit = (props) => {
             })
         }).then((res) => res.json())
         .then((commData) => {
-            props.fetchComments();
+            props.fetchComms();
             props.updateOff();
         })
-       
+    }   
     
 
     return(
         <div>
-            <Modal isOpen = {true}>
+            <Modal modalClassName="modal" isOpen = {true}>
                 <ModalHeader>Update Comment</ModalHeader>
                 <ModalBody>
                     <Form onSubmit={commUpdate}>
@@ -47,11 +51,12 @@ const CommEdit = (props) => {
                             <Label htmlFor="comment"> Edit Comment: </Label>
                             <Input name="comment" value={editComment} onChange={(e) => setEditComment(e.target.value)}/>
                         </FormGroup>
-                        <Button type="submit">Update Comment</Button>
+                        <Button type="submit">Update</Button>
+                        <Button onClick={(e) => props.updateOff()}>Cancel</Button>
                     </Form>
                 </ModalBody>
             </Modal>
         </div>
     )
-}}
+}
 export default CommEdit;

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Table, Button } from 'reactstrap';
 import CommCreate from './CommCreate';
 import CommEdit from './CommEdit';
+import APIURL from '../helpers/Environment';
 
 
 const CommTable = (props) => {
@@ -9,6 +10,16 @@ const CommTable = (props) => {
 
   const [updateActive, setUpdateActive] = useState(false);
   const [commToUpdate, setCommToUpdate] = useState({});
+
+  const deleteComm = (comment) => {
+    fetch(`${APIURL}/comment/${comment.id}`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': props.token
+      })
+    }).then(() => props.fetchComms())
+  }
 
 
   const commMapper = () => {
@@ -20,13 +31,15 @@ const CommTable = (props) => {
           <td>{comment.schedule}</td>
           <td>{comment.line}</td>
           <td>{comment.comment}</td>
-          <td><Button>Delete</Button><Button onClick={(e) => {updateOn()}}>Update</Button></td>
+          <td><Button onClick={(e) => {deleteComm(comment)}}>Delete</Button><Button onClick={(e) => editUpdateComm(comment)}>Update</Button></td>
         </tr>
   )
 } )}
 
-const editUpdateComm = (comm) => {
-  setCommToUpdate(comm)
+const editUpdateComm = (comment) => {
+  console.log(comment);
+  setCommToUpdate(comment);
+  setUpdateActive(true);
 }
 
 const updateOn = () => {
