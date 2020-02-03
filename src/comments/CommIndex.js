@@ -10,7 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
 import CommTable from './CommTable';
-import APIURL from '../helpers/Environment';
+import APIURL from '../helpers/environment';
 
 
 import ListItemIcon from '@material-ui/core/ListItemIcon';

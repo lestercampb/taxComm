@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Table, Button } from 'reactstrap';
 import CommCreate from './CommCreate';
 import CommEdit from './CommEdit';
-import APIURL from '../helpers/Environment';
+import APIURL from '../helpers/environment';
 
 
 const CommTable = (props) => {
