@@ -52,7 +52,7 @@ return (
                     <Input name="password" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
                 </FormGroup>
                 
-                <Button color="primary" onClick={email.type==="email" && password.minLength==="5" ? toggle : null} type="submit">Submit</Button>
+                <Button color="primary" onClick={email.type==="email" && password.minLength==="5" ? toggle : email.type} type="submit">Submit</Button>
                 <Button color="secondary" onClick = {toggle}>Cancel</Button>
             </Form>
         </ModalBody>

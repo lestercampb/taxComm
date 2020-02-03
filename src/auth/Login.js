@@ -40,10 +40,10 @@ return (
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password:</Label>
-                    <Input name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <Input name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </FormGroup>
                 
-                <Button color="primary"  onClick={email.type==="email" ? toggle : console.log('needs email')} type="submit">Submit</Button>
+                <Button color="primary"  onClick={email.type==="email" ? toggle : email.type } type="submit">Submit</Button>
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </Form>
         </ModalBody>
