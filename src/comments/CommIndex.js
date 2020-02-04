@@ -72,6 +72,43 @@ const CommIndex = (props) => {
     })
   }
 
+  const fetch1040 = () => {
+    fetch(`${APIURL}/comment/form/1040`, {
+      method: 'GET',
+      headers: new Headers ({
+        'Content-Type': 'application/json',
+        'Authorization': props.token
+      })
+    }).then((res) => res.json())
+    .then((commData1040) => {
+      setComments(commData1040);
+    })
+  }
+
+  const fetch1065 = () => {
+    fetch(`${APIURL}/comment/form/1065`, {
+      method: 'GET',
+      headers: new Headers ({
+        'Content-Type': 'application/json',
+        'Authorization': props.token
+      })
+    }).then((res) => res.json())
+    .then((commData1065) => {
+      setComments(commData1065);
+    })
+  }
+  const fetch1120 = () => {
+    fetch(`${APIURL}/comment/form/1120`, {
+      method: 'GET',
+      headers: new Headers ({
+        'Content-Type': 'application/json',
+        'Authorization': props.token
+      })
+    }).then((res) => res.json())
+    .then((commData1120) => {
+      setComments(commData1120);
+    })
+  }
  
 
 
@@ -103,6 +140,12 @@ const CommIndex = (props) => {
         <List>
 
         <ListItem button key={'ALL'} onClick={(e) => fetchComms()}> <ListItemText primary={'ALL'} />
+        </ListItem>
+        <ListItem button key={'1040'} onClick={(e) => fetch1040()}> <ListItemText primary={'1040'} />
+        </ListItem>
+        <ListItem button key={'1065'} onClick={(e) => fetch1065()}> <ListItemText primary={'1065'} />
+        </ListItem>
+        <ListItem button key={'1120'} onClick={(e) => fetch1120()}> <ListItemText primary={'1120'} />
         </ListItem>
          {/* {/*} {['1040', '1065', '1120', 'ALL'].map((text) => (
             <ListItem button key={text}>

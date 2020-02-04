@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Table, Button } from 'reactstrap';
+import { Table, Button, Input } from 'reactstrap';
 import CommCreate from './CommCreate';
 import CommEdit from './CommEdit';
 import APIURL from '../helpers/environment';
@@ -27,11 +27,12 @@ const CommTable = (props) => {
     return (
       
        <tr key={index}>
+          <td align="center"><Input type="checkbox" bssize="md" name="check" ></Input></td>
           <td>{comment.form}</td>
           <td>{comment.schedule}</td>
           <td>{comment.line}</td>
           <td>{comment.comment}</td>
-          <td><Button onClick={(e) => {deleteComm(comment)}}>Delete</Button><Button onClick={(e) => editUpdateComm(comment)}>Update</Button></td>
+          <td><Button size="sm" onClick={(e) => {deleteComm(comment)}}>Delete</Button><Button size="sm" onClick={(e) => editUpdateComm(comment)}>Update</Button></td>
         </tr>
   )
 } )}
@@ -64,6 +65,7 @@ return(
   <Table hover>
    <thead>
         <tr>
+          <th>Complete?</th>
           <th>Form</th>
           <th>Schedule</th>
           <th>Line</th>

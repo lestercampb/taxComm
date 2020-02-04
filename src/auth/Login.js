@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, Alert} from 'reactstrap';
 import APIURL from '../helpers/environment';
 
 const Login = (props) => {
@@ -7,6 +7,8 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [modal, setModal] = useState(true);
+    const [visible, setVisible] = useState(false);
+    const onDismiss = () => setVisible(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -18,12 +20,17 @@ const Login = (props) => {
                 'Content-Type': 'application/json'
             })
         }).then(
-            (response) => response.json()
+            (response) => response.json(),
+            
         ).then((data) => {
             props.updateToken(data.sessionToken);
             console.log(data.user.firstName);
-            props.updateUser(data.user.firstName);
-        }) 
+            props.updateUser(data.user.firstName);      
+        }) .catch((err ) =>{
+            console.log('no such user');
+            setVisible(true);
+            
+        })
     }
 
     const toggle = () => setModal(!modal);
@@ -46,6 +53,9 @@ return (
                 <Button color="primary"  onClick={email.type==="email" ? toggle : email.type } type="submit">Submit</Button>
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </Form>
+
+    <Alert color="info" isOpen={visible} toggle={onDismiss}>No such user. Please click Cancel and sign up.</Alert>
+    
         </ModalBody>
     </Modal>
     </>
