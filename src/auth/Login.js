@@ -54,7 +54,7 @@ return (
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </Form>
 
-    <Alert color="info" isOpen={visible} toggle={onDismiss}>No such user. Please click Cancel and sign up.</Alert>
+    <Alert color="info" isOpen={visible} toggle={onDismiss}>Username and/or password is incorrect.  Please try again, or register.</Alert>
     
         </ModalBody>
     </Modal>
